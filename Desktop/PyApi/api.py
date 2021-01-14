@@ -14,7 +14,7 @@ products = []
 strs = ['1','2','3','4','B','A','S','E']
 str1 = ""
 
-ids = ["104364", "103591"]
+ids = ["104364", "103591"] #BURAYA URL KODLARI GİRİLECEK
 
 def getProducts():
     root = et.Element('root')
