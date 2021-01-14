@@ -19,7 +19,6 @@ ids = ["104364", "103591"] #BURAYA URL KODLARI GİRİLECEK
 def getProducts():
     root = et.Element('root')
     for id in ids:
-        i = i+1
         random.shuffle(strs)
         uniq = str1.join(strs)
 
@@ -123,7 +122,7 @@ def getProducts():
 def home():
     return "<h1>Hello World</h1><p>Bu site bir denemedir.</p>"
 
-@app.route("/api/products", methods=['POST'])
+@app.route("/api/products", methods=['GET'])
 def product():
     return getProducts()
     
