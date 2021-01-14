@@ -114,8 +114,6 @@ def getProducts():
 
             a = a+1
             
-            
-            #VARYANTLARI EKLEMELİSİN YOKSA YAPTIĞIN PROGRAM BİR BOKA YARAMAZ
 
         xml = et.tostring(root, encoding="unicode")
 
