@@ -5,6 +5,7 @@ import urllib
 import random
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as et
+from datetime import datetime
 
 app = Flask(__name__) 
 app.config["JSON_SORT_KEYS"] = False
@@ -124,6 +125,12 @@ def home():
 
 @app.route("/api/products", methods=['GET'])
 def product():
+    now = datetime.now()
+    tarih = now.strftime("%d/%m/%Y %H:%M:%S")
+    ipadd = flask.request.remote_addr
+    log = open("logs.txt", "a")
+    log.write("Tarih : {}  IP : {} \n".format(tarih, ipadd))
+    log.close()
     return getProducts()
     
 app.run(host='0.0.0.0')
