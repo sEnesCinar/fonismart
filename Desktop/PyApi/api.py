@@ -12,16 +12,17 @@ app.config["JSON_SORT_KEYS"] = False
 
 products = []
 
-strs = ['1','2','3','4','B','A','S','E']
-str1 = ""
+stokint = 0
 
 ids = ["104364", "103591"] #BURAYA URL KODLARI GİRİLECEK
 
-def getProducts():
+def getProducts(stokint):
     root = et.Element('root')
     for id in ids:
-        random.shuffle(strs)
-        uniq = str1.join(strs)
+        if stokint != 0:
+            stokint = int(stokint)
+        stokint+=1
+        stokint = f"{stokint:03}"
 
         bilgiler = []
         renkstok = []
@@ -65,6 +66,11 @@ def getProducts():
         stok = str(sum(renkstok))
         kategori = category[1].text.strip()
 
+        codeChars = list(marka.upper())
+        charLen = len(codeChars)
+        print(codeChars)
+        uniq = "{}{}{}{}".format(codeChars[0], codeChars[(charLen-3)], codeChars[(charLen-1)], stokint)
+
         item = et.Element('item')
         root.append(item)
 
@@ -96,6 +102,9 @@ def getProducts():
         a = 0
         for renk in renkler:
             variant = et.SubElement(variants, 'variant')
+
+            vStockCode = et.SubElement(variant, 'vStock')
+            vStockCode.text = str(uniq + "_" + str(a))
 
             vstockAmount = et.SubElement(variant, 'vStockAmount')
             vstockAmount.text = str(renkstok[a])
@@ -131,6 +140,6 @@ def product():
     log = open("logs.txt", "a")
     log.write("Tarih : {}  IP : {} \n".format(tarih, ipadd))
     log.close()
-    return getProducts()
+    return getProducts(stokint)
     
 app.run(host='0.0.0.0')
